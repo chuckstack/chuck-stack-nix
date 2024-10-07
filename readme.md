@@ -11,7 +11,7 @@ Since a new NixOS has few tools installed by default, you can run the following 
 ```
 nix-shell --packages git neovim
 cd /etc/nixos/
-git clone https://github.com/chuckstack/chuboe-nix.git
+git clone https://github.com/chuckstack/chuck-stack-nix.git
 nvim configuration.nix #make below changes
 exit
 ```
