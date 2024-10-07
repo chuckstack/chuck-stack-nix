@@ -35,9 +35,9 @@
     }];
   }];
 
-  users.users.chuboe.openssh.authorizedKeys.keyFiles = [
-    ./authorized_keys
-  ];
+  #users.users.chuboe.openssh.authorizedKeys.keyFiles = [
+  #  ./authorized_keys
+  #];
 
   nixpkgs.config.allowUnfree = true;
 
