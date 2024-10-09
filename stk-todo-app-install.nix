@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }:
+{ config, lib, pkgs, modulesPath, ... }:
 
 let
   run-migrations = pkgs.writeScriptBin "run-migrations" ''
@@ -6,8 +6,8 @@ let
     set -e
 
     # Create the 'root' role with login privileges
-    ${pkgs.sudo}/bin/sudo -u postgres ${pkgs.postgresql}/bin/psql -c "CREATE ROLE root WITH LOGIN" 
-    ${pkgs.sudo}/bin/sudo -u postgres ${pkgs.postgresql}/bin/psql -c "CREATE DATABASE stk_todo_db OWNER root" 
+    ${pkgs.sudo}/bin/sudo -u postgres ${pkgs.postgresql}/bin/psql -c "CREATE ROLE IF NOT EXISTS root WITH LOGIN" 
+    ${pkgs.sudo}/bin/sudo -u postgres ${pkgs.postgresql}/bin/psql -c "CREATE DATABASE IF NOT EXISTS stk_todo_db OWNER root" 
     ${pkgs.sudo}/bin/sudo -u postgres ${pkgs.postgresql}/bin/psql -d stk_todo_db -c "ALTER USER root SET search_path TO public" 
 
     # Set your database URL
