@@ -37,16 +37,15 @@
 # the above configures all local users (with a user on the db) to connect using psql
 # the below notes gives instructions on how to add root as a db user so they can use the default postgres db for quick testing
 
-# from sudo -u postgres psql
-#    create role root with login;
-#    GRANT CONNECT ON DATABASE postgres TO root;
-#    GRANT USAGE ON SCHEMA public TO root;
-#    GRANT create ON SCHEMA public TO root;
-#    GRANT SELECT, INSERT, UPDATE, DELETE ON ALL TABLES IN SCHEMA public TO root;
-#    GRANT ALL PRIVILEGES ON ALL SEQUENCES IN SCHEMA public TO root;
-#    ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT SELECT, INSERT, UPDATE, DELETE ON TABLES TO root;
-#    ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT ALL ON SEQUENCES TO root;
-#    ALTER USER root SET search_path TO public;
+# sudo -u postgres psql -c "create role root with login"
+# sudo -u postgres psql -c "GRANT CONNECT ON DATABASE postgres TO root"
+# sudo -u postgres psql -c "GRANT USAGE ON SCHEMA public TO root"
+# sudo -u postgres psql -c "GRANT create ON SCHEMA public TO root"
+# sudo -u postgres psql -c "GRANT SELECT, INSERT, UPDATE, DELETE ON ALL TABLES IN SCHEMA public TO root"
+# sudo -u postgres psql -c "GRANT ALL PRIVILEGES ON ALL SEQUENCES IN SCHEMA public TO root"
+# sudo -u postgres psql -c "ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT SELECT, INSERT, UPDATE, DELETE ON TABLES TO root"
+# sudo -u postgres psql -c "ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT ALL ON SEQUENCES TO root"
+# sudo -u postgres psql -c "ALTER USER root SET search_path TO public"
 
 # in cli:
 #    echo "export PGDATABASE=postgres" >> ~/.bashrc
