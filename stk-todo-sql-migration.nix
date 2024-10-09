@@ -5,6 +5,11 @@ let
     #!${pkgs.bash}/bin/bash
     set -e
 
+    # Create the 'root' role with login privileges
+    ${pkgs.sudo}/bin/sudo -u postgres ${pkgs.postgresql}/bin/psql -c "CREATE ROLE root WITH LOGIN" 
+    ${pkgs.sudo}/bin/sudo -u postgres ${pkgs.postgresql}/bin/psql -c "CREATE DATABASE stk_todo_db OWNER root" 
+    ${pkgs.sudo}/bin/sudo -u postgres ${pkgs.postgresql}/bin/psql -d stk_todo_db -c "ALTER USER root SET search_path TO public" 
+
     # Set your database URL
     export DATABASE_URL="postgres:///myapp"
 
