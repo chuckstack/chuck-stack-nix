@@ -1,5 +1,10 @@
 { config, lib, pkgs, modulesPath, ... }:
 
+environment.systemPackages = with pkgs; [
+  # other packages...
+  sqlx-cli
+];
+
 {
 services.postgresql = {
      settings = {
