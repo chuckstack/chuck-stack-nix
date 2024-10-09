@@ -11,10 +11,10 @@ let
     ${pkgs.sudo}/bin/sudo -u postgres ${pkgs.postgresql}/bin/psql -d stk_todo_db -c "ALTER USER root SET search_path TO public" 
 
     # Set your database URL
-    export DATABASE_URL="postgres:///myapp"
+    export DATABASE_URL="postgres:///stk_todo_db"
 
     # Set the Git repository URL and the local path where it should be cloned
-    REPO_URL="https://github.com/your-username/your-repo.git"
+    REPO_URL="https://github.com/chuckstack/chuck-stack-todo-app.git"
     CLONE_PATH="/tmp/db-migrations"
 
     # Ensure the clone directory is empty
@@ -27,7 +27,6 @@ let
     cd "$CLONE_PATH"
 
     # Run the migrations
-    ${pkgs.sqlx-cli}/bin/sqlx database create
     ${pkgs.sqlx-cli}/bin/sqlx migrate run
 
     # Clean up
