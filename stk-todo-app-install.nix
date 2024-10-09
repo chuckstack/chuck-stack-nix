@@ -49,6 +49,6 @@ in
     };
   };
 
-  # Ensure postgres user has necessary permissions
-  users.users.postgres.extraGroups = [ "users" ];
+  # Ensure postgres user has necessary permissions - do not believe this is necessary - and it can make the server less secure
+  # users.users.postgres.extraGroups = [ "users" ];
 }
