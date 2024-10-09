@@ -64,6 +64,7 @@
     jq
     pass
     ripgrep
+    sudo
   ];
 
   # zram does NOT work in incus - DOES work in aws
