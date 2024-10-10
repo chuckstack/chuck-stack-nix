@@ -6,9 +6,9 @@ let
     set -e
 
     # Create the 'root' role with login privileges
-    ${pkgs.sudo}/bin/sudo -u postgres ${pkgs.postgresql}/bin/psql -c "CREATE ROLE IF NOT EXISTS root WITH LOGIN" 
-    ${pkgs.sudo}/bin/sudo -u postgres ${pkgs.postgresql}/bin/psql -c "CREATE DATABASE IF NOT EXISTS stk_todo_db OWNER root" 
-    ${pkgs.sudo}/bin/sudo -u postgres ${pkgs.postgresql}/bin/psql -d stk_todo_db -c "ALTER USER root SET search_path TO public" 
+    su -c "${pkgs.postgresql}/bin/psql -c \"CREATE ROLE IF NOT EXISTS root WITH LOGIN\" " postgres
+    su -c "${pkgs.postgresql}/bin/psql -c \"CREATE DATABASE IF NOT EXISTS stk_todo_db OWNER root\" " postgres
+    su -c "${pkgs.postgresql}/bin/psql -d stk_todo_db -c \"ALTER USER root SET search_path TO public\" " postgres
 
     # Set your database URL
     export DATABASE_URL="postgres:///stk_todo_db"
