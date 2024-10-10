@@ -5,11 +5,6 @@ let
     #!${pkgs.bash}/bin/bash
     set -e
 
-    # Create the 'root' role with login privileges
-    su -c "${pkgs.postgresql}/bin/psql -c \"CREATE ROLE IF NOT EXISTS root WITH LOGIN\" " postgres
-    su -c "${pkgs.postgresql}/bin/psql -c \"CREATE DATABASE IF NOT EXISTS stk_todo_db OWNER root\" " postgres
-    su -c "${pkgs.postgresql}/bin/psql -d stk_todo_db -c \"ALTER USER root SET search_path TO public\" " postgres
-
     # Set your database URL
     export DATABASE_URL="postgres:///stk_todo_db"
 
@@ -35,9 +30,14 @@ let
   '';
 in
 {
+  # PostgreSQL configuration
+  services.postgresql = {
+    ensureDatabases = [ "stk_todo_db" ];
+  };
+
   environment.systemPackages = [ run-migrations pkgs.git pkgs.sqlx-cli ];
 
-  systemd.services.db-migrations = {
+  systemd.services.stk-todo-db-migrations = {
     description = "Clone migration repo and run database migrations";
     after = [ "postgresql.service" ];
     wantedBy = [ "multi-user.target" ];
@@ -47,7 +47,4 @@ in
       ExecStart = "${run-migrations}/bin/run-migrations";
     };
   };
-
-  # Ensure postgres user has necessary permissions - do not believe this is necessary - and it can make the server less secure
-  # users.users.postgres.extraGroups = [ "users" ];
 }
