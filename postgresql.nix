@@ -8,7 +8,7 @@
   
   services.postgresql = {
 
-     # uncomment the below lines if you wish to enable tcp and/or remote connections
+     # uncomment the below lines if you wish to enable tcp and/or remote connections - also see below firewall setting
      #enableTCPIP = true;
      #settings = {
      #  listen_addresses = "*";
@@ -36,6 +36,9 @@
        # host   all     all     ::/0       scram-sha-256
      '';
   };
+  
+  # Open ports in the firewall
+  #networking.firewall.allowedTCPPorts = [ 5432 ];
 }
 
 # the above configures all local users (with a user on the db) to connect using psql
