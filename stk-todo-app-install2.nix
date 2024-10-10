@@ -33,7 +33,6 @@ in
   # PostgreSQL configuration
   services.postgresql = {
     ensureDatabases = [ "stk_todo_db" ];
-    ];
   };
 
   environment.systemPackages = [ run-migrations pkgs.git pkgs.sqlx-cli ];
