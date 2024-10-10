@@ -28,12 +28,14 @@
     ];
   };
 
-  security.sudo.extraRules = [{
-    users = ["chuboe"];
-    commands = [{ command = "ALL";
-      options = ["NOPASSWD"];
-    }];
-  }];
+  # should not need sudo in a nixos environment
+  # use this instead: su -c "some-command" some-user
+  #security.sudo.extraRules = [{
+  #  users = ["chuboe"];
+  #  commands = [{ command = "ALL";
+  #    options = ["NOPASSWD"];
+  #  }];
+  #}];
 
   #users.users.chuboe.openssh.authorizedKeys.keyFiles = [
   #  ./authorized_keys
@@ -64,7 +66,6 @@
     jq
     pass
     ripgrep
-    sudo
   ];
 
   # zram does NOT work in incus - DOES work in aws
