@@ -37,7 +37,7 @@ in
 
   environment.systemPackages = [ run-migrations pkgs.git pkgs.sqlx-cli ];
 
-  systemd.services.db-migrations = {
+  systemd.services.stk-todo-db-migrations = {
     description = "Clone migration repo and run database migrations";
     after = [ "postgresql.service" ];
     wantedBy = [ "multi-user.target" ];
