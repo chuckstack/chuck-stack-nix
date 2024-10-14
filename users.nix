@@ -5,7 +5,7 @@ let
     owner = "cboecking";
     repo = "keys";
     rev = "main";  # or any other branch or commit hash
-    sha256 = "";  # replace with actual hash
+    sha256 = "sha256-+KTI8xKp6/CMOVMsJYHQ7eMUwJEN8euNRKV9/7o3ECg";  # replace with actual hash
   };
   chuboeAuthKeys = "${chuboeKeys}/id_rsa.pub";
 in
