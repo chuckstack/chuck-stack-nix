@@ -24,5 +24,9 @@
       #shell = pkgs.bashInteractive;  # or pkgs.nologin if you want to prevent interactive login
 
     };
+
+    # Create a group for the service user
+    users.groups.serviceuser = {};
+
   };
 }
