@@ -17,16 +17,16 @@
     LC_TIME = "en_US.UTF-8";
   };
 
-  # Define a user account. 
-  users.users.chuboe = {
-    isNormalUser = true;
-    description = "chuboe";
-    extraGroups = [ "networkmanager" "wheel" ];
-    packages = with pkgs; [
-    #  firefox
-    #  thunderbird
-    ];
-  };
+  # Define a user account - moved to user.nix
+  #users.users.chuboe = {
+  #  isNormalUser = true;
+  #  description = "chuboe";
+  #  extraGroups = [ "networkmanager" "wheel" ];
+  #  packages = with pkgs; [
+  #  #  firefox
+  #  #  thunderbird
+  #  ];
+  #};
 
   # should not need sudo in a nixos environment
   # use this instead: su -c "some-command" some-user
@@ -37,7 +37,8 @@
   #  }];
   #}];
 
-  #users.users.chuboe.openssh.authorizedKeys.keyFiles = [
+  # moved to user.nix
+  #users.users.chuboe.openssh.authorizedKeys.keyFiles = [ 
   #  ./authorized_keys
   #];
 
@@ -88,8 +89,8 @@
     enable = true;
     lfs.enable = true;
     config.credential.helper = "cache --timeout 7200";
-    config.user.email = "chuck@chuboe.com";
-    config.user.name = "Chuck Boecking";
+    #config.user.email = "chuck@chuboe.com";
+    #config.user.name = "Chuck Boecking";
   };
 
   programs.starship = {

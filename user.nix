@@ -19,7 +19,7 @@ in
 {
   users.users = {
     # Real sudo user that can log in
-    chuboe2 = {
+    chuboe = {
       isNormalUser = true;
       extraGroups = [ "wheel" "networkmanager" ]; # Add any other groups as needed
       openssh.authorizedKeys.keyFiles = [ chuboeAuthKeys ];

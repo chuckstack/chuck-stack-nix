@@ -28,6 +28,8 @@ These nix configs are designed to be composable. As a result, you can add multip
       ./lxd.nix
       ./chuck-stack-nix/system.nix  # here
       ./chuck-stack-nix/postgresql.nix  # here
+      ./chuck-stack-nix/user.nix  # here
+      ./chuck-stack-nix/stk-todo-app-install.nix  # here
       ./chuck-stack-nix/nginx.nix  # here
     ];
 ...
