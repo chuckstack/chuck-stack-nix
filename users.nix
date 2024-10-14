@@ -13,8 +13,13 @@ in
     chuboe2 = {
       isNormalUser = true;
       extraGroups = [ "wheel" "networkmanager" ]; # Add any other groups as needed
-      openssh.authorizedKeys.keys = [ chuboeAuthKeys ];
+      openssh.authorizedKeys.keyFiles = [ chuboeAuthKeys ];
+
       # Add other user-specific configurations here
+      packages = with pkgs; [
+        #firefox
+        #thunderbird
+      ];
     };
 
     # Service user without login capabilities
