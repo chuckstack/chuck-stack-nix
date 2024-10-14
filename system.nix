@@ -104,9 +104,9 @@
     "h" = "history";
   };
 
-  programs.bash.shellInit = "
-  source /etc/nixos/chuboe-nix/.mybash
-  ";
+  #programs.bash.shellInit = "
+  #source /etc/nixos/chuboe-nix/.mybash
+  #";
 
   environment.etc."inputrc" = {
   text = pkgs.lib.mkDefault( pkgs.lib.mkAfter ''
