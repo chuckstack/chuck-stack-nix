@@ -1,12 +1,21 @@
 { config, lib, pkgs, modulesPath, ... }:
 
 let
-  chuboeAuthKeyUrl = "https://raw.githubusercontent.com/cboecking/keys/refs/heads/main/id_rsa.pub";
-  chuboeAuthKeys = pkgs.fetchurl {
-    url = chuboeAuthKeyUrl;
-    sha256 = "sha256-P6urHYR0fpoy+TF4xTzDdqf8ao894QEk1XQ/TbT0TLQ";
+  chuboeKeys = pkgs.fetchFromGitHub {
+    owner = "cboecking";
+    repo = "keys";
+    rev = "main";  # or any other branch or commit hash
+    sha256 = "";  # replace with actual hash
   };
+  chuboeAuthKeys = "${chuboeKeys}/id_rsa.pub";
 in
+#let
+#  chuboeAuthKeyUrl = "https://raw.githubusercontent.com/cboecking/keys/refs/heads/main/id_rsa.pub";
+#  chuboeAuthKeys = pkgs.fetchurl {
+#    url = chuboeAuthKeyUrl;
+#    sha256 = "sha256-P6urHYR0fpoy+TF4xTzDdqf8ao894QEk1XQ/TbT0TLQ"; #note: an empty string removes the hash check - nix will complain
+#  };
+#in
 {
   users.users = {
     # Real sudo user that can log in
