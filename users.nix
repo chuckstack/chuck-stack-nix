@@ -1,14 +1,19 @@
 { config, lib, pkgs, modulesPath, ... }:
 
+let
+  chuboeAuthKeyUrl = "https://raw.githubusercontent.com/cboecking/keys/refs/heads/main/id_rsa.pub";
+  chuboeAuthKeys = pkgs.fetchurl {
+    url = chuboeAuthKeyUrl;
+    #sha256 = "sha256-XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+  };
+in
 {
   users.users = {
-    # Real user that can log in
+    # Real sudo user that can log in
     chuboe2 = {
       isNormalUser = true;
-      #extraGroups = [ "wheel" "networkmanager" ]; # Add any other groups as needed
-      #openssh.authorizedKeys.keys = [
-      #  "ssh-rsa AAAAB3NzaC1yc2EAA... alice@example.com"
-      #];
+      extraGroups = [ "wheel" "networkmanager" ]; # Add any other groups as needed
+      openssh.authorizedKeys.keys = [ chuboeAuthKeys ];
       # Add other user-specific configurations here
     };
 
