@@ -4,7 +4,7 @@ let
   chuboeAuthKeyUrl = "https://raw.githubusercontent.com/cboecking/keys/refs/heads/main/id_rsa.pub";
   chuboeAuthKeys = pkgs.fetchurl {
     url = chuboeAuthKeyUrl;
-    #sha256 = "sha256-XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+    sha256 = "sha256-P6urHYR0fpoy+TF4xTzDdqf8ao894QEk1XQ/TbT0TLQ";
   };
 in
 {
