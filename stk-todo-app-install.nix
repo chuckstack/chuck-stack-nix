@@ -68,4 +68,35 @@ in
 
   # Create a group for the service user
   users.groups.postgREST = {};
+
+  # Create PostgREST configuration file directly in the Nix configuration
+  environment.etc."postgrest.conf" = {
+    text = ''
+      db-uri = "postgres://${postgresUser}@//${postgresDb}?host=/var/run/postgresql"
+      db-schema = "public"
+      db-anon-role = "postgrest_web_anon"
+      server-port = ${toString postgrestPort}
+      # jwt-secret = "your-jwt-secret"
+      # max-rows = 1000
+
+      # Add any other PostgREST configuration options here
+    '';
+    mode = "0600";  # More restrictive permissions due to sensitive information
+  };
+
+  systemd.services.postgrest = {
+    description = "PostgREST Service";
+    after = [ "network.target" "postgresql.service" "stk-todo-db-migrations.service" ];
+    wantedBy = [ "multi-user.target" ];
+    serviceConfig = {
+      ExecStart = "${pkgs.postgrest}/bin/postgrest /etc/postgrest.conf";
+      Restart = "always";
+      RestartSec = "10s";
+      User = "postgREST";
+      Group = "postgREST";
+    };
+  };
+
+  # Open firewall for PostgREST
+  networking.firewall.allowedTCPPorts = [ postgrestPort ];
 }
