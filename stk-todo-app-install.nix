@@ -4,18 +4,6 @@ let
   postgrestPort = 3000; # variable
   postgresUser = "postgrest";
   postgresDb = "stk_todo_db";
-
-  postgrestConfigContent = ''
-    db-uri = "postgres://${postgresUser}@/${postgresDb}?host=/run/postgresql"
-    db-schema = "public"
-    db-anon-role = "postgrest_web_anon"
-    server-port = ${toString postgrestPort}
-    # jwt-secret = "your-jwt-secret"
-    # max-rows = 1000
-
-    # Add any other Postgrest configuration options here
-  '';
-
   run-migrations = pkgs.writeScriptBin "run-migrations" ''
     #!${pkgs.bash}/bin/bash
     set -e
@@ -81,38 +69,34 @@ in
   # Create a group for the service user
   users.groups.postgrest = {};
 
-  system.activationScripts.postgrestConfig = ''
-    mkdir -p /var/lib/postgrest
-    echo "${postgrestConfigContent}" > /var/lib/postgrest/postgrest.conf
-    chown postgrest:postgrest /var/lib/postgrest/postgrest.conf
-    chmod 600 /var/lib/postgrest/postgrest.conf
-  '';
+  # Create Postgrest configuration file directly in the Nix configuration
+  environment.etc."postgrest.conf" = {
+    text = ''
+      db-uri = "postgres://${postgresUser}@/${postgresDb}?host=/run/postgresql"
+      db-schema = "public"
+      db-anon-role = "postgrest_web_anon"
+      server-port = ${toString postgrestPort}
+      # jwt-secret = "your-jwt-secret"
+      # max-rows = 1000
 
-  ## Create Postgrest configuration file directly in the Nix configuration
-  #environment.etc."postgrest/postgrest.conf" = {
-  #  target = "/var/lib/postgrest/postgrest.conf";
-  #  text = ''
-  #    db-uri = "postgres://${postgresUser}@/${postgresDb}?host=/run/postgresql"
-  #    db-schema = "public"
-  #    db-anon-role = "postgrest_web_anon"
-  #    server-port = ${toString postgrestPort}
-  #    # jwt-secret = "your-jwt-secret"
-  #    # max-rows = 1000
+      # Add any other Postgrest configuration options here
+    '';
+    mode = "0600";  # More restrictive permissions due to sensitive information
 
-  #    # Add any other Postgrest configuration options here
-  #  '';
-  #  user = "postgrest";
-  #  group = "postgrest";
-  #  mode = "0600";  # More restrictive permissions due to sensitive information
+  };
 
-  #};
+  system.activationScripts = {
+    postgrestConf = ''
+      chown postgrest:postgrest /etc/postgrest.conf
+    '';
+  };
 
   systemd.services.postgrest = {
     description = "PostgREST Service";
     after = [ "network.target" "postgresql.service" "stk-todo-db-migrations.service" ];
     wantedBy = [ "multi-user.target" ];
     serviceConfig = {
-      ExecStart = "${pkgs.postgrest}/bin/postgrest /var/lib/postgrest/postgrest.conf";
+      ExecStart = "${pkgs.postgrest}/bin/postgrest /etc/postgrest.conf";
       Restart = "always";
       RestartSec = "10s";
       User = "postgrest";
