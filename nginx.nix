@@ -17,17 +17,19 @@
   services.nginx = {
     enable = true;
     virtualHosts = {
+      "localhost" = {
+        locations."/" = {
+          proxyPass = "http://localhost:3000";
+          #proxyWebsockets = true;
+        };
+      };
       "blog.example.com" = {
         forceSSL = true;
         enableACME = true;
-        # All serverAliases will be added as extra domain names on the certificate.
         serverAliases = [ "myblog.example.com" ];
-        #locations."/" = {
-        #  root = "/var/www/blog";
-        #};
         locations."/" = {
           proxyPass = "http://localhost:3000";
-          #proxyWebsockets = true; # Enable this if your application uses WebSockets
+          #proxyWebsockets = true;
         };
       };
     };
