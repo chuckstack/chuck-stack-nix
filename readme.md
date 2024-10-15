@@ -12,10 +12,10 @@ You can use the below files like a menu of services. Chose the options you wish 
 - postgresql.nix - installs PostgreSQL with minimal configuration
 - user.nix - provides example 'real' and 'system' users
 - stk-todo-app-install.nix - represents the most simple version of a chuck-stack application
-  - It configures PostgreSQL to contain a specific database
-  - It creates a service to run migrations
-  - It creates a PostgREST user named: postgrest
-  - It configures PostgREST and runs it as a service
+  - configures PostgreSQL to contain a specific database
+  - creates a service to run migrations
+  - creates a PostgREST user named: postgrest
+  - configures PostgREST and runs it as a service
 - nginx.nix - installs and configures nginx for publishing a static and providing a reverse proxy for PostgREST
 
 ## First Connection
