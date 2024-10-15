@@ -82,6 +82,13 @@ in
       # Add any other Postgrest configuration options here
     '';
     mode = "0600";  # More restrictive permissions due to sensitive information
+
+  };
+
+  system.activationScripts = {
+    postgrestConf = ''
+      chown postgrest:postgrest /etc/postgrest.conf
+    '';
   };
 
   systemd.services.postgrest = {
