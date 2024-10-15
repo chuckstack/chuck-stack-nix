@@ -1,6 +1,9 @@
 { config, lib, pkgs, modulesPath, ... }:
 
 let
+  postgrestPort = 3000; # variable
+  postgresUser = "postgREST";
+  postgresDb = "stk_todo_db";
   run-migrations = pkgs.writeScriptBin "run-migrations" ''
     #!${pkgs.bash}/bin/bash
     set -e
