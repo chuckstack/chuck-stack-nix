@@ -2,7 +2,7 @@
 
 let
   postgrestPort = 3000; # variable
-  postgresUser = "postgREST";
+  postgresUser = "postgrest";
   postgresDb = "stk_todo_db";
   run-migrations = pkgs.writeScriptBin "run-migrations" ''
     #!${pkgs.bash}/bin/bash
@@ -53,23 +53,23 @@ in
 
   users.users = {
     # Service user without login capabilities
-    postgREST = {
+    postgrest = {
       isSystemUser = true;
-      group = "postgREST";
+      group = "postgrest";
       description = "User for running the postgREST service";
 
       # uncomment these lines if you need the user to have a home
-      #home = "/var/lib/postgREST";
-      #createHome = true;
-      #shell = pkgs.bashInteractive;  # or pkgs.nologin if you want to prevent interactive login
+      home = "/var/lib/postgrest";
+      createHome = true;
+      shell = pkgs.bashInteractive;  # or pkgs.nologin if you want to prevent interactive login
 
     };
   };
 
   # Create a group for the service user
-  users.groups.postgREST = {};
+  users.groups.postgrest = {};
 
-  # Create PostgREST configuration file directly in the Nix configuration
+  # Create Postgrest configuration file directly in the Nix configuration
   environment.etc."postgrest.conf" = {
     text = ''
       db-uri = "postgres://${postgresUser}@//${postgresDb}?host=/var/run/postgresql"
@@ -79,7 +79,7 @@ in
       # jwt-secret = "your-jwt-secret"
       # max-rows = 1000
 
-      # Add any other PostgREST configuration options here
+      # Add any other Postgrest configuration options here
     '';
     mode = "0600";  # More restrictive permissions due to sensitive information
   };
@@ -92,8 +92,8 @@ in
       ExecStart = "${pkgs.postgrest}/bin/postgrest /etc/postgrest.conf";
       Restart = "always";
       RestartSec = "10s";
-      User = "postgREST";
-      Group = "postgREST";
+      User = "postgrest";
+      Group = "postgrest";
     };
   };
 
