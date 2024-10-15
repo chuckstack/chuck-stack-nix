@@ -70,7 +70,8 @@ in
   users.groups.postgrest = {};
 
   # Create Postgrest configuration file directly in the Nix configuration
-  environment.etc."postgrest.conf" = {
+  environment.etc."postgrest/postgrest.conf" = {
+    target = "/var/lib/postgrest/postgrest.conf";
     text = ''
       db-uri = "postgres://${postgresUser}@/${postgresDb}?host=/run/postgresql"
       db-schema = "public"
@@ -81,14 +82,10 @@ in
 
       # Add any other Postgrest configuration options here
     '';
+    user = "postgrest";
+    group = "postgrest";
     mode = "0600";  # More restrictive permissions due to sensitive information
 
-  };
-
-  system.activationScripts = {
-    postgrestConf = ''
-      chown postgrest:postgrest /etc/postgrest.conf
-    '';
   };
 
   systemd.services.postgrest = {
@@ -96,7 +93,7 @@ in
     after = [ "network.target" "postgresql.service" "stk-todo-db-migrations.service" ];
     wantedBy = [ "multi-user.target" ];
     serviceConfig = {
-      ExecStart = "${pkgs.postgrest}/bin/postgrest /etc/postgrest.conf";
+      ExecStart = "${pkgs.postgrest}/bin/postgrest /var/lib/postgrest/postgrest.conf";
       Restart = "always";
       RestartSec = "10s";
       User = "postgrest";
