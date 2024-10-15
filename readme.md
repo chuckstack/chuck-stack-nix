@@ -13,7 +13,7 @@ You can use the below files like a menu of services. Chose the options you wish 
 - user.nix - provides example 'real' and 'system' users
 - stk-todo-app-install.nix - represents the most simple version of a chuck-stack application
   - configures PostgreSQL to contain a specific database
-  - creates a service to run migrations
+  - creates a service to run [migrations](https://github.com/chuckstack/chuck-stack-todo-app)
   - creates a PostgREST user named: postgrest
   - configures PostgREST and runs it as a service
 - nginx.nix - installs and configures nginx for publishing a static and providing a reverse proxy for PostgREST
