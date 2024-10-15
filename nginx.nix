@@ -22,8 +22,12 @@
         enableACME = true;
         # All serverAliases will be added as extra domain names on the certificate.
         serverAliases = [ "myblog.example.com" ];
+        #locations."/" = {
+        #  root = "/var/www/blog";
+        #};
         locations."/" = {
-          root = "/var/www/blog";
+          proxyPass = "http://localhost:3000";
+          #proxyWebsockets = true; # Enable this if your application uses WebSockets
         };
       };
     };
