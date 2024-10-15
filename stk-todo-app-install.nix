@@ -47,4 +47,22 @@ in
       ExecStart = "${run-migrations}/bin/run-migrations";
     };
   };
+
+  users.users = {
+    # Service user without login capabilities
+    postgREST = {
+      isSystemUser = true;
+      group = "postgREST";
+      description = "User for running the postgREST service";
+
+      # uncomment these lines if you need the user to have a home
+      #home = "/var/lib/postgREST";
+      #createHome = true;
+      #shell = pkgs.bashInteractive;  # or pkgs.nologin if you want to prevent interactive login
+
+    };
+  };
+
+  # Create a group for the service user
+  users.groups.postgREST = {};
 }
