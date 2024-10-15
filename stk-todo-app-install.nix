@@ -72,7 +72,7 @@ in
   # Create Postgrest configuration file directly in the Nix configuration
   environment.etc."postgrest.conf" = {
     text = ''
-      db-uri = "postgres://${postgresUser}@//${postgresDb}?host=/var/run/postgresql"
+      db-uri = "postgres://${postgresUser}@/${postgresDb}?host=/run/postgresql"
       db-schema = "public"
       db-anon-role = "postgrest_web_anon"
       server-port = ${toString postgrestPort}
