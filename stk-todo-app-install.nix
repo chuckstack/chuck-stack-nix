@@ -1,5 +1,8 @@
 { config, lib, pkgs, modulesPath, ... }:
 
+# Notes:
+  # discussed in https://www.chuck-stack.org/ls/stack-architecture.html
+
 let
   postgrestPort = 3000; # variable
   postgresUser = "postgrest";
