@@ -5,6 +5,7 @@
     # jdk17_headless
     # maven
     crowdsec
+    crowdsec-bouncer-nginx
   ];
 
   # Ref: https://nixos.wiki/wiki/ACME
