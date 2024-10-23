@@ -76,7 +76,7 @@ in
   environment.etc."postgrest.conf" = {
     text = ''
       db-uri = "postgres://${postgresUser}@/${postgresDb}?host=/run/postgresql"
-      db-schema = "public"
+      db-schema = "api"
       db-anon-role = "postgrest_web_anon"
       server-port = ${toString postgrestPort}
       # jwt-secret = "your-jwt-secret"
