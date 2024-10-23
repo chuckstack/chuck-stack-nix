@@ -2,6 +2,12 @@
 
 # Notes:
   # discussed in https://www.chuck-stack.org/ls/stack-architecture.html
+  # get list of todos via api from localhost:
+    # curl http://localhost:3000/stk_todo
+  # add todo via api from localhost:
+    # curl http://localhost:3000/stk_todo -X POST -H "Content-Type: application/json" -d '{"name": "do great things"}'
+  # get list of todos through nginx via ip -- assumes self signed (insecure)
+    # curl --insecure https://10.2.2.2/stk_todo
 
 let
   postgrestPort = 3000; # variable
