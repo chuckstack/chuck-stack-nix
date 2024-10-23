@@ -1,5 +1,11 @@
 { config, lib, pkgs, modulesPath, ... }:
 
+# Commands for testing and validating:
+  # cat /var/log/nginx/access.log
+  # systemctl status fail2ban.service
+  # fail2ban-client status
+  # fail2ban-client status nginx-general
+
 {
   services.fail2ban = {
     enable = true;
@@ -9,9 +15,9 @@
         port     = http,https
         filter   = nginx-general
         logpath  = /var/log/nginx/access.log
-        maxretry = 5
-        bantime  = 1h
-        findtime = 10m
+        maxretry = 3
+        bantime  = 12h
+        findtime = 1h
       '';
     };
   };
