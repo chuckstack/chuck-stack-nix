@@ -17,6 +17,7 @@
         logpath  = /var/log/nginx/access.log
         maxretry = 3
         bantime  = 12h
+        pollinterval = 3s
         findtime = 1h
       '';
     };
