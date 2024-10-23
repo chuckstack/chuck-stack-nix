@@ -1,1 +1,0 @@
-/nix/store/1gax5xs6h1b70gk7z274kx4qh04hsn96-postgresql-16.4/bin/postgres "-k" "/home/cb/code/chuck-stack-nix/nix-shell/postgresql-local/pgdata"
