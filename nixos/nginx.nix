@@ -17,12 +17,12 @@
   services.nginx = {
     enable = true;
     virtualHosts = {
-      "localhost" = {
-        locations."/" = {
-          proxyPass = "http://localhost:3000";
-          #proxyWebsockets = true;
-        };
-      };
+      #"localhost" = {
+      #  locations."/" = {
+      #    proxyPass = "http://localhost:3000";
+      #    #proxyWebsockets = true;
+      #  };
+      #};
       "blog.example.com" = {
         forceSSL = true;
         enableACME = true;

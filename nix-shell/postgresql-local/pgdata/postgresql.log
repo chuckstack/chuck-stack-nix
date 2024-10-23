@@ -1,0 +1,6 @@
+2024-10-21 20:16:01.307 UTC [347033] LOG:  starting PostgreSQL 16.4 on x86_64-pc-linux-gnu, compiled by gcc (GCC) 13.3.0, 64-bit
+2024-10-21 20:16:01.313 UTC [347033] LOG:  listening on Unix socket "/home/cb/code/chuck-stack-nix/nix-shell/postgresql-local/pgdata/.s.PGSQL.5432"
+2024-10-21 20:16:01.334 UTC [347036] LOG:  database system was shut down at 2024-10-21 20:16:00 UTC
+2024-10-21 20:16:01.343 UTC [347033] LOG:  database system is ready to accept connections
+2024-10-21 20:21:01.394 UTC [347034] LOG:  checkpoint starting: time
+2024-10-21 20:21:09.619 UTC [347034] LOG:  checkpoint complete: wrote 84 buffers (0.5%); 0 WAL file(s) added, 0 removed, 0 recycled; write=8.161 s, sync=0.036 s, total=8.225 s; sync files=48, longest=0.011 s, average=0.001 s; distance=420 kB, estimate=420 kB; lsn=0/15586E8, redo lsn=0/15586B0
