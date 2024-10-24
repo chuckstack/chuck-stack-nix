@@ -53,6 +53,7 @@ Here is an example configuration.nix file. Notice that I added the lines ending 
     ./chuck-stack-nix/nixos/user.nix  # here
     ./chuck-stack-nix/nixos/stk-todo-app.nix  # here
     ./chuck-stack-nix/nixos/nginx.nix  # here
+    ./chuck-stack-nix/nixos/nginx-fail2ban.nix  # here
     ];
 ...
 ```
@@ -63,18 +64,6 @@ nixos-rebuild switch
 ```
 If you exit from tmux and the nixos session then reconnect, your bash session will be updated with all the new tools and features.
 
-##  stk-todo-app-install.nix
+##  Notes
 
-Assuming no errors were thrown, you now have a working todo application.
-
-To list the existing todos via PostgREST:
-
-```bash
-curl localhost:3000/todo
-```
-
-To add a new todo via PostgREST:
-
-```bash
-curl http://localhost:3000/todo -X POST -H "Content-Type: application/json" -d '{"task": "work on nginx"}'
-```
+Each Nix file has a section at the top for notes about the configuration and its usage
