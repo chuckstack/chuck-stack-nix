@@ -47,6 +47,11 @@
           #  proxyPass = "http://localhost:3000";
           #};
 
+          # Allow access to functions - use if root url is blocked above and you want to grant access to one or more functions
+          #"/rpc" = {
+          #  proxyPass = "http://localhost:3000";
+          #};
+
         };
       };
     };
