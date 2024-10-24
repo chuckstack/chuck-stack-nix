@@ -29,21 +29,21 @@
         serverAliases = [ "myblog.example.com" ];
         locations = {
 
-	  # Root "/" path
-	  "/" = {
-          #  return = "404"; # Uncomment "/" if you wish to block the root url access - openapi/swagger
+          # Root "/" path
+          "/" = {
+            #return = "404";   # Uncomment "/" if you wish to block the root url access - openapi/swagger
             proxyPass = "http://localhost:3000";
-	  #  proxyWebsockets = true;
+            #proxyWebsockets = true;   # Uncomment if needed
           };
 
-	  # Allow access to any non-empty path - example: /some_table - use if root url is blocked above
+          # Allow access to any non-empty path (any table) - use if root url is blocked above
           #"~ ^/(?!$).*" = {
-          #  # This location block matches any non-empty path
           #  proxyPass = "http://localhost:3000";
+          #  return = "404"; # Uncomment "/" if you wish to block
           #};
 
-	  # Allow access to a specific path - most strict option - use if root url is blocked above
-          #locations."/stk_todo" = {
+          # Allow access to a specific path - use if root url is blocked above and you want the most strict/limiting rules
+          #"/stk_todo" = {
           #  proxyPass = "http://localhost:3000";
           #};
 
