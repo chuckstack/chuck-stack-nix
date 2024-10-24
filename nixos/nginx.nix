@@ -27,9 +27,26 @@
         forceSSL = true;
         enableACME = true;
         serverAliases = [ "myblog.example.com" ];
-        locations."/" = {
-          proxyPass = "http://localhost:3000";
-          #proxyWebsockets = true;
+        locations = {
+
+	  # Root "/" path
+	  "/" = {
+          #  return = "404"; # Uncomment "/" if you wish to block the root url access - openapi/swagger
+            proxyPass = "http://localhost:3000";
+	  #  proxyWebsockets = true;
+          };
+
+	  # Allow access to any non-empty path - example: /some_table - use if root url is blocked above
+          #"~ ^/(?!$).*" = {
+          #  # This location block matches any non-empty path
+          #  proxyPass = "http://localhost:3000";
+          #};
+
+	  # Allow access to a specific path - most strict option - use if root url is blocked above
+          #locations."/stk_todo" = {
+          #  proxyPass = "http://localhost:3000";
+          #};
+
         };
       };
     };
