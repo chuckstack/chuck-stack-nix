@@ -54,9 +54,8 @@ in
     # Note: this section needs stay in sync with stk-todo-app-sql => test => shell.nix
     # TODO: stk_todo_superuser with nologin? - tbd...
     initialScript = pkgs.writeText "stk-todo-init.sql" ''
-      CREATE ROLE stk_todo_superuser login; 
+      CREATE ROLE stk_todo_superuser LOGIN CREATEROLE; 
       CREATE DATABASE stk_todo_db OWNER stk_todo_superuser;
-      ALTER DATABASE stk_todo_db OWNER TO stk_todo_superuser;
     '';
   };
 
