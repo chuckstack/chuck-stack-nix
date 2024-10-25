@@ -18,7 +18,7 @@ let
     set -e
 
     # Set your database URL
-    export DATABASE_URL="postgres://stk_todo_user@/stk_todo_db"
+    export DATABASE_URL="postgres://stk_todo_superuser@/stk_todo_db"
 
     # Set the Git repository URL and the local path where it should be cloned
     REPO_URL="https://github.com/chuckstack/stk-todo-app-sql.git"
