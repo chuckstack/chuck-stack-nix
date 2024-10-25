@@ -44,16 +44,17 @@ in
 {
   # PostgreSQL configuration
   services.postgresql = {
-    ensureDatabases = [ "stk_todo_db" ];
-    ensureUsers = [
-      {
-        name = "stk_todo_superuser";
-      }
-    ];
+    #ensureDatabases = [ "stk_todo_db" ];
+    #ensureUsers = [
+    #  {
+    #    name = "stk_todo_superuser";
+    #  }
+    #];
     # This will set the owner of the database after it's created
     # TODO: stk_todo_superuser with nologin? - tbd...
-    initialScript = pkgs.writeText "postgres-init.sql" ''
-      CREATE ROLE stk_todo_superuser; 
+    initialScript = pkgs.writeText "stk-todo-init.sql" ''
+      CREATE ROLE stk_todo_superuser login; 
+      CREATE DATABASE stk_todo_db OWNER stk_todo_superuser;
       ALTER DATABASE stk_todo_db OWNER TO stk_todo_superuser;
     '';
   };
