@@ -6,6 +6,8 @@
     # curl http://localhost:3000/stk_todo
   # add todo via api from localhost:
     # curl http://localhost:3000/stk_todo -X POST -H "Content-Type: application/json" -d '{"name": "do great things"}'
+  # submit form - call to function 
+    # curl http://localhost:3000/rpc/stk_form_post_fn -X POST -H "Content-Type: application/json" -d '{"name": "you know who"}'
   # get list of todos through nginx via ip -- assumes self signed (insecure)
     # curl --insecure https://10.2.2.2/stk_todo
 
