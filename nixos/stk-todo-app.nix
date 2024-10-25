@@ -18,7 +18,7 @@ let
     set -e
 
     # Set your database URL
-    export DATABASE_URL="postgres://stk_todo_superuser@/stk_todo_db"
+    export DATABASE_URL="postgresql://stk_todo_superuser/stk_todo_db?host=/run/postgresql"
 
     # Set the Git repository URL and the local path where it should be cloned
     REPO_URL="https://github.com/chuckstack/stk-todo-app-sql.git"
@@ -51,6 +51,7 @@ in
     #  }
     #];
     # This will set the owner of the database after it's created
+    # Note: this section needs stay in sync with stk-todo-app-sql => test => shell.nix
     # TODO: stk_todo_superuser with nologin? - tbd...
     initialScript = pkgs.writeText "stk-todo-init.sql" ''
       CREATE ROLE stk_todo_superuser login; 
