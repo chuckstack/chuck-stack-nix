@@ -45,6 +45,20 @@ in
   # PostgreSQL configuration
   services.postgresql = {
     ensureDatabases = [ "stk_todo_db" ];
+    ensureUsers = [
+      {
+        name = "stk_todo_superuser";
+        ensurePermissions = {
+          "DATABASE stk_todo_db" = "ALL PRIVILEGES";
+        };
+        # Add this line to set NOLOGIN
+        extraFlags = [ "NOLOGIN" ];
+      }
+    ];
+    # This will set the owner of the database after it's created
+    initialScript = pkgs.writeText "postgres-init.sql" ''
+      ALTER DATABASE stk_todo_db OWNER TO stk_todo_superuser;
+    '';
   };
 
   environment.systemPackages = [ run-migrations pkgs.git pkgs.sqlx-cli ];
