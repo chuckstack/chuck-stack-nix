@@ -18,7 +18,7 @@ let
     set -e
 
     # Set your database URL
-    export DATABASE_URL="postgres:///stk_todo_db"
+    export DATABASE_URL="postgres://stk_todo_user@/stk_todo_db"
 
     # Set the Git repository URL and the local path where it should be cloned
     REPO_URL="https://github.com/chuckstack/stk-todo-app-sql.git"
@@ -48,15 +48,12 @@ in
     ensureUsers = [
       {
         name = "stk_todo_superuser";
-        ensurePermissions = {
-          "DATABASE stk_todo_db" = "ALL PRIVILEGES";
-        };
-        # Add this line to set NOLOGIN
-        extraFlags = [ "NOLOGIN" ];
       }
     ];
     # This will set the owner of the database after it's created
+    # TODO: stk_todo_superuser with nologin? - tbd...
     initialScript = pkgs.writeText "postgres-init.sql" ''
+      CREATE ROLE stk_todo_superuser; 
       ALTER DATABASE stk_todo_db OWNER TO stk_todo_superuser;
     '';
   };
@@ -69,7 +66,7 @@ in
     wantedBy = [ "multi-user.target" ];
     serviceConfig = {
       Type = "oneshot";
-      User = "postgres";
+      User = "stk_todo_superuser";
       ExecStart = "${run-migrations}/bin/run-migrations";
     };
   };
@@ -81,8 +78,19 @@ in
       group = "postgrest";
       description = "User for running the postgREST service";
 
-      # uncomment these lines if you need the user to have a home
+      # comment these lines if you do not need the user to have a home
       home = "/var/lib/postgrest";
+      createHome = true;
+      shell = pkgs.bashInteractive;  # or pkgs.nologin if you want to prevent interactive login
+
+    };
+    stk_todo_superuser = {
+      isSystemUser = true;
+      group = "stk_todo_superuser";
+      description = "User for managing stk_todo_db";
+
+      # comment these lines if you do not need the user to have a home
+      home = "/var/lib/stk_todo_superuser";
       createHome = true;
       shell = pkgs.bashInteractive;  # or pkgs.nologin if you want to prevent interactive login
 
@@ -91,6 +99,7 @@ in
 
   # Create a group for the service user
   users.groups.postgrest = {};
+  users.groups.stk_todo_superuser = {};
 
   # Create Postgrest configuration file directly in the Nix configuration
   environment.etc."postgrest.conf" = {
