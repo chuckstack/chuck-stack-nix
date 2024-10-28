@@ -36,18 +36,18 @@
             #proxyWebsockets = true;   # Uncomment if needed
           };
 
-          # Allow access to any non-empty path (any table) - use if root url is blocked above
+          ## Allow access to any non-empty path (any table) - use if root url is blocked above
           #"~ ^/(?!$).*" = {
           #  proxyPass = "http://localhost:3000";
           #  return = "404"; # Uncomment "/" if you wish to block
           #};
 
-          # Allow access to a specific path - use if root url is blocked above and you want the most strict/limiting rules
+          ## Allow access to a specific path - use if root url is blocked above and you want the most strict/limiting rules
           #"/stk_todo" = {
           #  proxyPass = "http://localhost:3000";
           #};
 
-          # Allow access to functions - use if root url is blocked above and you want to grant access to one or more functions
+          ## Allow access to functions - use if root url is blocked above and you want to grant access to one or more functions
           #"/rpc" = {
           #  proxyPass = "http://localhost:3000";
           #};
