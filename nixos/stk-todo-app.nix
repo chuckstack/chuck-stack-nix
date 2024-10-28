@@ -139,6 +139,6 @@ in
     };
   };
 
-  # Open firewall for PostgREST
-  networking.firewall.allowedTCPPorts = [ postgrestPort ];
+  # Open firewall for PostgREST - only needed if nginx is running on a different machine
+  #networking.firewall.allowedTCPPorts = [ postgrestPort ];
 }
