@@ -64,6 +64,27 @@ nixos-rebuild switch
 ```
 If you exit from tmux and the nixos session then reconnect, your bash session will be updated with all the new tools and features.
 
+### Network Static IP
+
+If you wish to expose an instance to the outside world fron an Incus cluster, execute the following assuming your external IP is x.x.x.x/32.
+
+```bash
+# from incus cli
+incus config device override incus-isntance-name eth0 ipv4.routes.external=x.x.x.x/32
+```
+
+Inside your container's /etc/nixos/configuration.nix, update the systemd.network => networks => networkConfig accordingly:
+```nix
+...
+      networkConfig = {
+        Address = "x.x.x.x/32";
+        DHCP = "yes";
+        IPv6AcceptRA = true;
+      };
+...
+```
+If you run `ip a`, you should see an internal IP and the above x.x.x.x/32 external IP.
+
 ##  Notes
 
 Each Nix file has a section at the top for notes about the configuration and its usage
