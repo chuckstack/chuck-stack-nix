@@ -102,6 +102,7 @@
 
   environment.shellAliases = {
     "vim" = "nvim";
+    "vi" = "nvim";
     "h" = "history";
   };
 
