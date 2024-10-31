@@ -37,11 +37,6 @@
   #  }];
   #}];
 
-  # moved to user.nix
-  #users.users.chuboe.openssh.authorizedKeys.keyFiles = [ 
-  #  ./authorized_keys
-  #];
-
   nixpkgs.config.allowUnfree = true;
 
   environment.systemPackages = with pkgs; [
@@ -118,19 +113,19 @@
     '');
   };
 
-  # Enable the OpenSSH daemon.
-  services.openssh = {
-    enable = true;
-    # require public key authentication for better security
-    settings.PasswordAuthentication = false;
-    settings.KbdInteractiveAuthentication = false;
-    #settings.PermitRootLogin = "yes";
-  };
+  ## Uncomment to enable the OpenSSH daemon.
+  #services.openssh = {
+  #  enable = true;
+  #  # require public key authentication for better security
+  #  settings.PasswordAuthentication = false;
+  #  settings.KbdInteractiveAuthentication = false;
+  #  #settings.PermitRootLogin = "yes";
+  #};
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ 22 ];
   # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.
-  # networking.firewall.enable = false;
+  networking.firewall.enable = true;
 
 }
