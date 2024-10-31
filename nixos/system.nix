@@ -113,19 +113,25 @@
     '');
   };
 
-  ## Uncomment to enable the OpenSSH daemon.
-  #services.openssh = {
-  #  enable = true;
-  #  # require public key authentication for better security
-  #  settings.PasswordAuthentication = false;
-  #  settings.KbdInteractiveAuthentication = false;
-  #  #settings.PermitRootLogin = "yes";
-  #};
+  # Enable if ssh service needed 
+  services.openssh = {
+    enable = false;
+    # require public key authentication for better security
+    settings.PasswordAuthentication = false;
+    settings.KbdInteractiveAuthentication = false;
+    #settings.PermitRootLogin = "yes";
+  };
 
   # Open ports in the firewall.
-  # networking.firewall.allowedTCPPorts = [ 22 ];
-  # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.
-  networking.firewall.enable = true;
+  networking.firewall = {
+    enable = true;
+    allowPing = false;
+    #allowedTCPPorts = [ 99 999 ];
+    #allowedUDPPorts = [ ... ];
+    #extraCommands = ''
+      # add stuff here
+    #''
+  };
 
 }

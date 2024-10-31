@@ -17,6 +17,7 @@ You can use the below files like a menu of services. Chose the options you wish 
   - creates a PostgREST user named: postgrest
   - configures PostgREST and runs it as a service
 - nginx.nix - installs and configures nginx for publishing a static and providing a reverse proxy for PostgREST
+- [more...](./nixos/)
 
 ## First Connection
 
@@ -63,6 +64,14 @@ To rebuild with the new configuration:
 nixos-rebuild switch
 ```
 If you exit from tmux and the nixos session then reconnect, your bash session will be updated with all the new tools and features.
+
+### SSH Details
+
+SSH is disabled by default in system.nix. Uncomment the system.nix => services.openssh section if you wish to enable it. The reasons it is disabled by default are:
+
+- It is safer to assume you do not want it enabled and open.
+- The NixOS default behavior is to open the ssh port firewall port when the ssh service is enagbled. To prevent this, you must explicitly disable the port in the system.nix => networking.firewall section.
+- The Incus command `incus exec instance-name bash` does not use ssh to connect; therefore, you can connect from Incus without needing the sshd services enabled.
 
 ### Network Static IP
 
