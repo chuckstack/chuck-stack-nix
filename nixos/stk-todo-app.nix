@@ -57,6 +57,7 @@ in
     # TODO: stk_todo_superuser with nologin? - tbd...
     initialScript = pkgs.writeText "stk-todo-init.sql" ''
       CREATE ROLE stk_todo_superuser LOGIN CREATEROLE; 
+      COMMENT ON ROLE stk_todo_superuser IS 'superuser role to administer the stk_todo_db database';
       CREATE DATABASE stk_todo_db OWNER stk_todo_superuser;
     '';
   };
