@@ -43,7 +43,7 @@
           #};
 
           ## Allow access to a specific path - use if root url is blocked above and you want the most strict/limiting rules
-          #"/stk_todo" = {
+          #"/stk_wf_request" = {
           #  proxyPass = "http://localhost:3000";
           #};
 
