@@ -110,7 +110,7 @@ in
     text = ''
       db-uri = "postgres://${postgresUser}@/${postgresDb}?host=/run/postgresql"
       db-schema = "api"
-      db-anon-role = "postgrest_web_anon"
+      db-anon-role = "stk_todo_api_role"
       server-port = ${toString postgrestPort}
       # jwt-secret = "your-jwt-secret"
       # max-rows = 1000
