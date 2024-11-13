@@ -11,7 +11,7 @@ You can use the below files like a menu of services. Chose the options you wish 
 - system.nix - installs all the tools one might expect to manage a server.
 - postgresql.nix - installs PostgreSQL with minimal configuration
 - user.nix - provides example 'real' and 'system' users
-- stk-todo-app.nix - represents the most simple version of a chuck-stack application
+- stk-app.nix - represents the most simple version of a chuck-stack application
   - configures PostgreSQL to contain a specific database
   - creates a service to run [migrations](https://github.com/chuckstack/stk-todo-app-sql)
   - creates a PostgREST user named: postgrest
@@ -52,7 +52,7 @@ Here is an example configuration.nix file. Notice that I added the lines ending 
     ./chuck-stack-nix/nixos/system.nix  # here
     ./chuck-stack-nix/nixos/postgresql.nix  # here
     ./chuck-stack-nix/nixos/user.nix  # here
-    ./chuck-stack-nix/nixos/stk-todo-app.nix  # here
+    ./chuck-stack-nix/nixos/stk-app.nix  # here
     ./chuck-stack-nix/nixos/nginx.nix  # here
     ./chuck-stack-nix/nixos/nginx-fail2ban.nix  # here
     ];
