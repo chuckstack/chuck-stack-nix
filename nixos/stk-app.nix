@@ -23,7 +23,7 @@ let
     export DATABASE_URL="postgresql://stk_superuser/stk_db?host=/run/postgresql"
 
     # Set the Git repository URL and the local path where it should be cloned
-    REPO_URL="https://github.com/chuckstack/stk-todo-app-sql.git"
+    REPO_URL="https://github.com/chuckstack/stk-app-sql.git"
     CLONE_PATH="/tmp/db-migrations"
 
     # Ensure the clone directory is empty
@@ -53,7 +53,7 @@ in
     #  }
     #];
     # This will set the owner of the database after it's created
-    # Note: this section needs stay in sync with stk-todo-app-sql => test => shell.nix
+    # Note: this section needs stay in sync with stk-app-sql => test => shell.nix
     initialScript = pkgs.writeText "stk-init.sql" ''
       CREATE ROLE stk_superuser LOGIN CREATEROLE; 
       COMMENT ON ROLE stk_superuser IS 'superuser role to administer the stk_db database';
